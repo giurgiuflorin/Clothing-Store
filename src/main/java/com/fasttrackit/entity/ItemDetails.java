@@ -2,6 +2,7 @@ package com.fasttrackit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Table(name = "item_details")
@@ -19,7 +21,7 @@ public class ItemDetails {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "made_in")
+    @Column(name = "made_in", nullable = false)
     private String madeIn;
 
     @Column(name = "eco_percent")
@@ -28,8 +30,9 @@ public class ItemDetails {
     @Column(name = "iron_temperature")
     private int ironAtMaxCelsius;
 
-    @OneToOne(mappedBy = "itemDetails", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-    CascadeType.DETACH, CascadeType.REFRESH})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "items_id")
     @JsonIgnore
     private Item item;
 
