@@ -11,8 +11,6 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
-    List<Item> findAll();
-
     @Query(value = "select i from Item i where " +
             "(:name = null or lower(i.name) like lower(concat('$', :name, '$'))) " +
             "and (:minPrice = null or i.price >= :minPrice) " +
@@ -30,4 +28,23 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                            @Param("gender") String gender,
                            @Param("material") String material,
                            @Param("color") String color);
+
+    @Query(value =
+            "UPDATE `clothing_store`.`items` SET " +
+            "`name` = CASE WHEN :name IS NOT NULL THEN :name ELSE `name` END, " +
+            "`price` = CASE WHEN :price IS NOT NULL THEN :price ELSE `price` END, " +
+            "`description` = CASE WHEN :description IS NOT NULL THEN :description ELSE `description` END, " +
+            "`category` = CASE WHEN :category IS NOT NULL THEN :category ELSE `category` END, " +
+            "`gender` = CASE WHEN :gender IS NOT NULL THEN :gender ELSE `gender` END, " +
+            "`material` = CASE WHEN :material IS NOT NULL THEN :material ELSE `material` END, " +
+            "`color` = CASE WHEN :color IS NOT NULL THEN :color ELSE `color` END " +
+            "WHERE `id` = :id", nativeQuery = true)
+    Item updateItemById(@Param("id") int id,
+                        @Param("name") String name,
+                        @Param("price") Double price,
+                        @Param("description") String description,
+                        @Param("category") String category,
+                        @Param("gender") String gender,
+                        @Param("material") String material,
+                        @Param("color") String color);
 }

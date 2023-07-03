@@ -83,3 +83,7 @@ VALUES
     ('Italy', 30, 120, 38),
     ('China', 40, 100, 39),
     ('USA', 12, 70, 40);
+
+INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Ioan', 'Petcutiu', 'Bihor, Oradea, 455');
+INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Silvia', 'Fenechiu', 'Timis, Timisoara, 555');
+INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Emanuel', 'Balan', 'Bucuresti, 788');

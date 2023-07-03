@@ -5,9 +5,8 @@ import com.fasttrackit.entity.enumproperties.Color;
 import com.fasttrackit.entity.enumproperties.Gender;
 import com.fasttrackit.entity.enumproperties.Material;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +14,7 @@ import lombok.Setter;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -33,7 +33,8 @@ public class Item {
     private String name;
 
     @Column(name = "price", nullable = false)
-    @Size(max = 5, message = "No longer than 5 digits (including 2 decimals)")
+    @DecimalMin(value = "0.0", inclusive = true, message = "Price cannot be negative")
+    @DecimalMax(value = "999.99", inclusive = true, message = "Price cannot exceed 999.99")
     @NotNull(message = "Price cannot be null")
     private double price;
 
