@@ -2,9 +2,6 @@ package com.fasttrackit.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +22,11 @@ public class ItemDetails {
     private int id;
 
     @Column(name = "made_in", nullable = false)
-    @Size(max = 50, message = "Name of the country cannot be longer than 50 characters")
-    @NotBlank(message = "Please specify the country that the item was made in!")
-    @NotNull(message = "'madeIn' field cannot be null")
+//    @Size(max = 50, message = "Name of the country cannot be longer than 50 characters")
+//    @NotBlank(message = "Please specify the country that the item was made in!")
+//    @NotNull(message = "'madeIn' field cannot be null")
     private String madeIn;
+
 
     @Column(name = "eco_percent")
     private int percentOfEcoFriendlyMaterials;

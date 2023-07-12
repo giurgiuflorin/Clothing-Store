@@ -12,7 +12,7 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     @Query(value = "select i from Item i where " +
-            "(:name = null or lower(i.name) like lower(concat('$', :name, '$'))) " +
+            "(:name = null or lower(i.name) like lower(concat('%', :name, '%'))) " +
             "and (:minPrice = null or i.price >= :minPrice) " +
             "and (:maxPrice = null or i.price <= :maxPrice) " +
             "and (:description = null or lower(i.description) like lower(concat('%', :description, '%'))) " +

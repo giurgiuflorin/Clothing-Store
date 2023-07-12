@@ -74,9 +74,9 @@ public class Item {
             joinColumns = {
                     @JoinColumn(name = "items_id", referencedColumnName = "id")
             },
-    inverseJoinColumns = {
-            @JoinColumn(name = "orders_id", referencedColumnName = "id")
-    })
+            inverseJoinColumns = {
+                    @JoinColumn(name = "orders_id", referencedColumnName = "id")
+            })
     List<Order> orders;
 
     public Item(String name, double price, String description, Category category,
