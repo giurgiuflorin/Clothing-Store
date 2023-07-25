@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -38,5 +39,12 @@ public class ClothingStoreController {
                                @RequestParam(required = false) String color) {
 
         return itemService.updateItemById(id, name, price, description, category, gender, material, color);
+    }
+
+
+    // needs to be integrated in the main search method
+    @GetMapping("/byid")
+    public Optional<Item> getItemById(@RequestParam int id) {
+        return itemService.getItemById(id);
     }
 }
