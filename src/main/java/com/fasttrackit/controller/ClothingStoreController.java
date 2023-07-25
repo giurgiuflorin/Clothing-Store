@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -16,7 +15,8 @@ public class ClothingStoreController {
     private final ItemService itemService;
 
     @GetMapping
-    public List<Item> getItems(@RequestParam(required = false) String name,
+    public List<Item> getItems(@RequestParam(required = false) Integer id,
+                               @RequestParam(required = false) String name,
                                @RequestParam(required = false) Double minPrice,
                                @RequestParam(required = false) Double maxPrice,
                                @RequestParam(required = false) String description,
@@ -25,7 +25,7 @@ public class ClothingStoreController {
                                @RequestParam(required = false) String material,
                                @RequestParam(required = false) String color) {
 
-        return itemService.getAllItems(name, minPrice, maxPrice, description, category, gender, material, color);
+        return itemService.getAllItems(id, name, minPrice, maxPrice, description, category, gender, material, color);
     }
 
     @PutMapping("/updateItem")
@@ -41,10 +41,4 @@ public class ClothingStoreController {
         return itemService.updateItemById(id, name, price, description, category, gender, material, color);
     }
 
-
-    // needs to be integrated in the main search method
-    @GetMapping("/byid")
-    public Optional<Item> getItemById(@RequestParam int id) {
-        return itemService.getItemById(id);
-    }
 }

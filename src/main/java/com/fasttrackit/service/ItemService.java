@@ -19,10 +19,10 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
-    public List<Item> getAllItems(String name, Double minPrice, Double maxPrice,
+    public List<Item> getAllItems(Integer id, String name, Double minPrice, Double maxPrice,
                                   String description, String category, String gender,
                                   String material, String color) {
-        return itemRepository.filterItems(name, minPrice, maxPrice, description, category, gender,
+        return itemRepository.filterItems(id, name, minPrice, maxPrice, description, category, gender,
                 material, color);
     }
 
