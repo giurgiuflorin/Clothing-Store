@@ -3,7 +3,7 @@ DROP PROCEDURE IF EXISTS get_items;
 DELIMITER $$
 CREATE PROCEDURE get_items
 (
-	IN p_id INT,
+   IN p_id INT,
    IN p_name VARCHAR(255),
    IN p_minPrice DECIMAL(5, 2),
    IN p_maxPrice DECIMAL(5, 2),
