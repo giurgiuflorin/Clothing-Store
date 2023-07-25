@@ -3,6 +3,7 @@ DROP PROCEDURE IF EXISTS get_items;
 DELIMITER $$
 CREATE PROCEDURE get_items
 (
+	IN p_id INT,
    IN p_name VARCHAR(255),
    IN p_minPrice DECIMAL(5, 2),
    IN p_maxPrice DECIMAL(5, 2),
@@ -14,9 +15,10 @@ CREATE PROCEDURE get_items
 )
 BEGIN
 	SELECT * FROM items i
-    WHERE 
-    
-    (p_name IS NULL OR LOWER(i.name) LIKE LOWER(CONCAT('%', p_name, '%')))
+    WHERE
+
+    (p_id IS NULL OR i.id = p_id)
+		AND (p_name IS NULL OR LOWER(i.name) LIKE LOWER(CONCAT('%', p_name, '%')))
         AND (p_minPrice IS NULL OR i.price >= p_minPrice)
         AND (p_maxPrice IS NULL OR i.price <= p_maxPrice)
         AND (p_description IS NULL OR LOWER(i.description) LIKE LOWER(CONCAT('%', p_description, '%')))
