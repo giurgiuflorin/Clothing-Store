@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`customers` (
   `address` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`items` (
   `color` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 41
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`item_details` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 41
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -121,13 +121,13 @@ USE `clothing_store`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_item_and_item_details`(
 	id_param INT
 )
-BEGIN 
+BEGIN
     DELETE FROM items
     WHERE id = id_param;
-    
+
     DELETE FROM clothing_store.item_details
     WHERE items_id = id_param;
-    
+
     Select 1;
 END$$
 
@@ -153,9 +153,9 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `get_items`(
 )
 BEGIN
 	SELECT * FROM items i
-    WHERE 
-    
-    (p_id IS NULL OR i.id = p_id) 
+    WHERE
+
+    (p_id IS NULL OR i.id = p_id)
 		AND (p_name IS NULL OR LOWER(i.name) LIKE LOWER(CONCAT('%', p_name, '%')))
         AND (p_minPrice IS NULL OR i.price >= p_minPrice)
         AND (p_maxPrice IS NULL OR i.price <= p_maxPrice)
@@ -213,14 +213,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_item_details`(
     IN eco_percent_param TINYINT,
     IN iron_temperature_param TINYINT
 )
-BEGIN 
+BEGIN
     -- Check if item_details record exists for the given items_id
     DECLARE details_id INT;
-    
+
     SELECT id INTO details_id
     FROM item_details
     WHERE items_id = id_param;
-    
+
     -- If item_details record exists, update the details
     IF details_id IS NOT NULL THEN
         UPDATE item_details
@@ -233,9 +233,9 @@ BEGIN
         INSERT INTO item_details (made_in, eco_percent, iron_temperature, items_id)
         VALUES (made_in_param, eco_percent_param, iron_temperature_param, id_param);
     END IF;
-    
+
     SELECT 1;
-    
+
 END$$
 
 DELIMITER ;
