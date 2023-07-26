@@ -6,10 +6,7 @@ import com.fasttrackit.entity.enumproperties.Gender;
 import com.fasttrackit.entity.enumproperties.Material;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "items")
 public class Item {
 

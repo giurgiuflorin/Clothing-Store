@@ -35,6 +35,13 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                         @Param("color") String color);
 
 
-    // this method will be added to the main search method
-    Item getItemById(int id);
+
+    @Query(value = "call clothing_store.delete_item_and_item_details (:itemId)", nativeQuery = true)
+    void deleteById(@Param("itemId") int itemId);
+
+    @Query(value = "call clothing_store.update_item_details (:id, :madeIn, :ecoPercent, :ironTemperature)", nativeQuery = true)
+    void updateItemDetails(@Param("id") Integer itemId,
+                           @Param("madeIn") String madeIn,
+                           @Param("ecoPercent") Integer ecoPercent,
+                           @Param("ironTemperature") Integer ironTemp);
 }

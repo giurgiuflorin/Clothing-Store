@@ -59,10 +59,35 @@ public class ItemService {
 
     }
 
+    @Transactional
+    public Item addItem(String name, double price, String description, String category,
+                        String gender, String material, String color) {
 
-    // this method will be added to the main search method
-    public Optional<Item> getItemById(int id) {
-        return itemRepository.findById(id);
+        Category category1 = Category.valueOf(category.toUpperCase());
+        Gender gender1 = Gender.valueOf(gender.toUpperCase());
+        Material material1 = Material.valueOf(material.toUpperCase());
+        Color color1 = Color.valueOf(color.toUpperCase());
+
+        Item item = new Item(name, price, description, category1, gender1, material1, color1);
+        return itemRepository.save(item);
+    }
+
+    @Transactional
+    public void deleteItemById(int id) {
+
+        if (!itemRepository.existsById(id)) {
+            throw new NotFoundException("Item with id [" + id + "] does not exist.");
+        }
+
+        Optional<Item> item = itemRepository.findById(id);
+
+        itemRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void addItemDetails(Integer id, String madeIn, Integer ecoPercent, Integer ironTemp) {
+
+        itemRepository.updateItemDetails(id, madeIn, ecoPercent, ironTemp);
     }
 
 }

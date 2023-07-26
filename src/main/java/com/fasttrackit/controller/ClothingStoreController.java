@@ -41,4 +41,29 @@ public class ClothingStoreController {
         return itemService.updateItemById(id, name, price, description, category, gender, material, color);
     }
 
+    @PutMapping("/updateItemDetails")
+    public void updateItemDetails(Integer id,
+                                         @RequestParam String madeIn,
+                                         @RequestParam(required = false) Integer ecoPercent,
+                                         @RequestParam(required = false) Integer ironTemp) {
+        itemService.addItemDetails(id, madeIn, ecoPercent, ironTemp);
+    }
+
+    @PostMapping("/addItem")
+    public Item addItem(@RequestParam String name,
+                        @RequestParam double price,
+                        @RequestParam String description,
+                        @RequestParam String category,
+                        @RequestParam String gender,
+                        @RequestParam String material,
+                        @RequestParam String color) {
+        return itemService.addItem(name, price, description, category, gender, material, color);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable int id) {
+
+        itemService.deleteItemById(id);
+    }
+
 }
