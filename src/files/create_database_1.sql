@@ -109,6 +109,26 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+
+-- -----------------------------------------------------
+-- Table `clothing_store`.`stocks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `clothing_store`.`stocks` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `items_id` INT NOT NULL,
+  `quantity` VARCHAR(45) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  INDEX `fk_stocks_items1_idx` (`items_id` ASC) VISIBLE,
+  CONSTRAINT `fk_stocks_items1`
+    FOREIGN KEY (`items_id`)
+    REFERENCES `clothing_store`.`items` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
 USE `clothing_store` ;
 
 -- -----------------------------------------------------

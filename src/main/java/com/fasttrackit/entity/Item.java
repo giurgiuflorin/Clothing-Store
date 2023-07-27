@@ -66,6 +66,10 @@ public class Item {
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
     private ItemDetails itemDetails;
 
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    private Stock stock;
+
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "orders_items",
