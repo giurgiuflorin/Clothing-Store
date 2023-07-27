@@ -35,9 +35,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                         @Param("color") String color);
 
 
-
     @Query(value = "call clothing_store.delete_item_and_item_details (:itemId)", nativeQuery = true)
     void deleteById(@Param("itemId") int itemId);
+
 
     @Query(value = "call clothing_store.update_item_details (:id, :madeIn, :ecoPercent, :ironTemperature)", nativeQuery = true)
     void updateItemDetails(@Param("id") Integer itemId,
@@ -45,7 +45,17 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                            @Param("ecoPercent") Integer ecoPercent,
                            @Param("ironTemperature") Integer ironTemp);
 
+
     @Query(value = "call update_stock(:itemId, :quantity)", nativeQuery = true)
     void updateStockByItemId(@Param("itemId") int itemId,
                              @Param("quantity") int quantity);
+
+
+    @Query(value = "call clothing_store.add_customer_to_order(:clientId)", nativeQuery = true)
+    void addCustomerToOrder(@Param("clientId") int customerId);
+
+    @Query(value = "call clothing_store.add_customer(:firstName, :lastName, :address)", nativeQuery = true)
+    void addCustomer(@Param("firstName") String firstName,
+                     @Param("lastName") String lastName,
+                     @Param("address") String address);
 }

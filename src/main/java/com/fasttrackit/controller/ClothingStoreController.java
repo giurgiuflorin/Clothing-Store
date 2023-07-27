@@ -28,6 +28,17 @@ public class ClothingStoreController {
         return itemService.getAllItems(id, name, minPrice, maxPrice, description, category, gender, material, color);
     }
 
+    @PostMapping("/addItem")
+    public Item addItem(@RequestParam String name,
+                        @RequestParam double price,
+                        @RequestParam String description,
+                        @RequestParam String category,
+                        @RequestParam String gender,
+                        @RequestParam String material,
+                        @RequestParam String color) {
+        return itemService.addItem(name, price, description, category, gender, material, color);
+    }
+
     @PutMapping("/updateItem")
     public Item updateItemById(int id,
                                @RequestParam(required = false) String name,
@@ -39,6 +50,12 @@ public class ClothingStoreController {
                                @RequestParam(required = false) String color) {
 
         return itemService.updateItemById(id, name, price, description, category, gender, material, color);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable int id) {
+
+        itemService.deleteItemById(id);
     }
 
     @PutMapping("/updateItemDetails")
@@ -55,21 +72,19 @@ public class ClothingStoreController {
         itemService.updateStockByItemId(itemId, quantity);
     }
 
-    @PostMapping("/addItem")
-    public Item addItem(@RequestParam String name,
-                        @RequestParam double price,
-                        @RequestParam String description,
-                        @RequestParam String category,
-                        @RequestParam String gender,
-                        @RequestParam String material,
-                        @RequestParam String color) {
-        return itemService.addItem(name, price, description, category, gender, material, color);
+
+    @PostMapping("/addCustomer")
+    public void addCustomer(@RequestParam String firstName,
+                            @RequestParam String lastName,
+                            @RequestParam String address) {
+        itemService.addCustomer(firstName, lastName, address);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable int id) {
-
-        itemService.deleteItemById(id);
+    @PostMapping("/addCustomerToOrder")
+    public void addCustomerToOrder(@RequestParam int customerId) {
+         itemService.addCustomerToOrder(customerId);
     }
+
+
 
 }

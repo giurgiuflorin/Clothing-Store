@@ -88,15 +88,42 @@ public class ItemService {
     @Transactional
     public void addItemDetails(Integer id, String madeIn, Integer ecoPercent, Integer ironTemp) {
 
+        if (!itemRepository.existsById(id)) {
+            throw new NotFoundException("Item with id [" + id + "] does not exist!");
+        }
+        if (ecoPercent < 0 || ecoPercent > 100) {
+            throw new IncorrectData("EcoPercent must have a value between 0 and 100!");
+        }
+        if (ironTemp < 0 || ironTemp > 140) {
+            throw new IncorrectData("IronPercent must have a value between 0 and 140!");
+        }
+
         itemRepository.updateItemDetails(id, madeIn, ecoPercent, ironTemp);
     }
 
     @Transactional
     public void updateStockByItemId(int itemId, int quantity) {
+
         if (quantity < 0 || quantity > 50) {
             throw new IncorrectData("Stock can not be negative or bigger than 50!");
         }
+
+        if (!itemRepository.existsById(itemId)) {
+            throw new NotFoundException("Item with id [" + itemId + "] does not exist!");
+        }
         itemRepository.updateStockByItemId(itemId, quantity);
+    }
+
+    @Transactional
+    public void addCustomerToOrder(int customerId) {
+
+        itemRepository.addCustomerToOrder(customerId);
+    }
+
+    @Transactional
+    public void addCustomer(String firstName, String lastName, String address) {
+
+        itemRepository.addCustomer(firstName, lastName, address);
     }
 
 }

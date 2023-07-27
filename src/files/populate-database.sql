@@ -84,9 +84,17 @@ VALUES
     ('China', 40, 100, 39),
     ('USA', 12, 70, 40);
 
-INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Ioan', 'Petcutiu', 'Bihor, Oradea, 455');
-INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Silvia', 'Fenechiu', 'Timis, Timisoara, 555');
-INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Emanuel', 'Balan', 'Bucuresti, 788');
+INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`)
+VALUES
+('Ioan', 'Petcutiu', 'Bihor, Oradea, 455'),
+('Silvia', 'Fenechiu', 'Timis, Timisoara, 555'),
+('Darius', 'Balan', 'Arad, Ineu, 788'),
+('Anastasia', 'Docan', 'Bucuresti, 788'),
+('Alexandru', 'Macedon', 'Timis, Timisoara 788'),
+('Lucian', 'Blaga', 'Bucuresti, 23'),
+('Paula', 'Turcan', 'Bucuresti, 411'),
+('Mihaela', 'Gruia', 'Arad, Siria 788'),
+
 
 
 

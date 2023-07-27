@@ -23,7 +23,7 @@ public class Order {
     @Column(name = "id")
     private int id;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date", nullable = false)
     private Date date;
 

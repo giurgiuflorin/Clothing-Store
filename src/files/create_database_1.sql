@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`customers` (
   `address` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -78,7 +78,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `clothing_store`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATETIME NOT NULL,
+  `date` DATE NOT NULL,
   `customers_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_orders_customers_idx` (`customers_id` ASC) VISIBLE,
@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`orders` (
     REFERENCES `clothing_store`.`customers` (`id`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -97,11 +98,14 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `clothing_store`.`orders_items` (
   `orders_id` INT NOT NULL,
   `items_id` INT NOT NULL,
-  PRIMARY KEY (`items_id`),
+  PRIMARY KEY (`orders_id`, `items_id`),
   INDEX `fk_orders_items_orders1_idx` (`orders_id` ASC) VISIBLE,
+  INDEX `fk_orders_items_items1_idx` (`items_id` ASC) VISIBLE,
   CONSTRAINT `fk_orders_items_items1`
     FOREIGN KEY (`items_id`)
-    REFERENCES `clothing_store`.`items` (`id`),
+    REFERENCES `clothing_store`.`items` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE RESTRICT,
   CONSTRAINT `fk_orders_items_orders1`
     FOREIGN KEY (`orders_id`)
     REFERENCES `clothing_store`.`orders` (`id`))
@@ -125,11 +129,69 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`stocks` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 43
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 USE `clothing_store` ;
+
+-- -----------------------------------------------------
+-- procedure add_client_to_order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS add_client_to_order;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_client_to_order`(
+	IN date_param DATE,
+    IN customer_id_param INT
+
+)
+BEGIN
+	INSERT INTO orders (date, customers_id)
+    VALUES (date_param, customer_id_param);
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure add_customer
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS add_customer;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_customer`(
+	IN first_name_param VARCHAR(45),
+    IN last_name_param VARCHAR(45),
+    IN address_param VARCHAR(500)
+)
+BEGIN
+	INSERT INTO customers(first_name, last_name, address)
+    VALUES(first_name_param, last_name_param, address_param);
+
+    SELECT 1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure add_customer_to_order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS add_customer_to_order;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_customer_to_order`(
+    IN customer_id_param INT
+)
+BEGIN
+	INSERT INTO orders (date, customers_id)
+    VALUES (curdate(), customer_id_param);
+    SELECT 1;
+END$$
+
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- procedure delete_item_and_item_details
