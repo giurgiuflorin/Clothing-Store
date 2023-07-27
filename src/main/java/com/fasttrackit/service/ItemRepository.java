@@ -44,4 +44,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                            @Param("madeIn") String madeIn,
                            @Param("ecoPercent") Integer ecoPercent,
                            @Param("ironTemperature") Integer ironTemp);
+
+    @Query(value = "call update_stock(:itemId, :quantity)", nativeQuery = true)
+    void updateStockByItemId(@Param("itemId") int itemId,
+                             @Param("quantity") int quantity);
 }

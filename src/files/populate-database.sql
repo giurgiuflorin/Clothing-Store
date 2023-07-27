@@ -87,3 +87,48 @@ VALUES
 INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Ioan', 'Petcutiu', 'Bihor, Oradea, 455');
 INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Silvia', 'Fenechiu', 'Timis, Timisoara, 555');
 INSERT INTO `clothing_store`.`customers` (`first_name`, `last_name`, `address`) VALUES ('Emanuel', 'Balan', 'Bucuresti, 788');
+
+
+
+INSERT INTO `clothing_store`.`stocks` (`items_id`, `quantity`)
+VALUES
+  (1, 10),
+  (2, 35),
+  (3, 20),
+  (4, 5),
+  (5, 48),
+  (6, 30),
+  (7, 15),
+  (8, 40),
+  (9, 25),
+  (10, 3),
+  (11, 17),
+  (12, 42),
+  (13, 8),
+  (14, 28),
+  (15, 50),
+  (16, 22),
+  (17, 12),
+  (18, 38),
+  (19, 19),
+  (20, 1),
+  (21, 31),
+  (22, 45),
+  (23, 2),
+  (24, 11),
+  (25, 47),
+  (26, 33),
+  (27, 6),
+  (28, 39),
+  (29, 14),
+  (30, 24),
+  (31, 50),
+  (32, 29),
+  (33, 7),
+  (34, 44),
+  (35, 13),
+  (36, 36),
+  (37, 16),
+  (38, 49),
+  (39, 21),
+  (40, 4);

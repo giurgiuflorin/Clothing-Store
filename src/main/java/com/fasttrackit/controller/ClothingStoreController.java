@@ -49,6 +49,12 @@ public class ClothingStoreController {
         itemService.addItemDetails(id, madeIn, ecoPercent, ironTemp);
     }
 
+    @PutMapping("/updateStock")
+    public void updateStockByItemId(@RequestParam int itemId,
+                                    @RequestParam int quantity) {
+        itemService.updateStockByItemId(itemId, quantity);
+    }
+
     @PostMapping("/addItem")
     public Item addItem(@RequestParam String name,
                         @RequestParam double price,

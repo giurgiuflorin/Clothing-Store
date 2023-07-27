@@ -5,6 +5,7 @@ import com.fasttrackit.entity.enumproperties.Category;
 import com.fasttrackit.entity.enumproperties.Color;
 import com.fasttrackit.entity.enumproperties.Gender;
 import com.fasttrackit.entity.enumproperties.Material;
+import com.fasttrackit.exception.IncorrectData;
 import com.fasttrackit.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,14 @@ public class ItemService {
     public void addItemDetails(Integer id, String madeIn, Integer ecoPercent, Integer ironTemp) {
 
         itemRepository.updateItemDetails(id, madeIn, ecoPercent, ironTemp);
+    }
+
+    @Transactional
+    public void updateStockByItemId(int itemId, int quantity) {
+        if (quantity < 0 || quantity > 50) {
+            throw new IncorrectData("Stock can not be negative or bigger than 50!");
+        }
+        itemRepository.updateStockByItemId(itemId, quantity);
     }
 
 }

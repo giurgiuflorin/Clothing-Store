@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`customers` (
   `address` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -116,7 +116,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `clothing_store`.`stocks` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `items_id` INT NOT NULL,
-  `quantity` VARCHAR(45) NOT NULL DEFAULT '0',
+  `quantity` INT NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   INDEX `fk_stocks_items1_idx` (`items_id` ASC) VISIBLE,
   CONSTRAINT `fk_stocks_items1`
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`stocks` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 43
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -256,6 +256,27 @@ BEGIN
 
     SELECT 1;
 
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure update_stock
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS update_stock;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_stock`(
+	IN itemId_param INT,
+    IN quantity_param INT
+)
+BEGIN
+	UPDATE stocks
+    SET quantity = quantity_param
+    WHERE items_id = itemId_param;
+
+    SELECT 1;
 END$$
 
 DELIMITER ;
