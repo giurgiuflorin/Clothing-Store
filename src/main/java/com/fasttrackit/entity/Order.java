@@ -1,5 +1,6 @@
 package com.fasttrackit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +28,10 @@ public class Order {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @OneToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
                           CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "customers_id")
+    @JsonIgnore
     private Customer customer;
 @ManyToMany(fetch = FetchType.LAZY)
 @JoinTable(name = "orders_items",

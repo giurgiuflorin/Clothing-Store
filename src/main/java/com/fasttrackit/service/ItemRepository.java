@@ -58,4 +58,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     void addCustomer(@Param("firstName") String firstName,
                      @Param("lastName") String lastName,
                      @Param("address") String address);
+
+
 }

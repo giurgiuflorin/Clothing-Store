@@ -1,6 +1,8 @@
 package com.fasttrackit.controller;
 
+import com.fasttrackit.entity.Customer;
 import com.fasttrackit.entity.Item;
+import com.fasttrackit.service.CustomerService;
 import com.fasttrackit.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 public class ClothingStoreController {
 
     private final ItemService itemService;
+    private final CustomerService customerService;
 
     @GetMapping
     public List<Item> getItems(@RequestParam(required = false) Integer id,
@@ -72,6 +75,13 @@ public class ClothingStoreController {
         itemService.updateStockByItemId(itemId, quantity);
     }
 
+    @GetMapping("/customers")
+    public List<Customer> getCustomers(@RequestParam(required = false) Integer id,
+                                       @RequestParam(required = false) String firstName,
+                                       @RequestParam(required = false) String lastName,
+                                       @RequestParam(required = false) String address) {
+        return customerService.getCustomers(id, firstName, lastName, address);
+    }
 
     @PostMapping("/addCustomer")
     public void addCustomer(@RequestParam String firstName,

@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -40,6 +42,6 @@ public class Customer {
     @NotNull(message = "Address cannot be null!")
     private String address;
 
-    @OneToOne(mappedBy = "customer")
-    private Order order;
+    @OneToMany(mappedBy = "customer")
+    private List<Order>  order;
 }

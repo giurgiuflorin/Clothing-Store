@@ -216,6 +216,34 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_customers
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS get_customers;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_customers`(
+ IN id_param INT,
+ IN first_name_param VARCHAR(45),
+ IN last_name_param VARCHAR(45),
+ IN address_param VARCHAR(500)
+)
+BEGIN
+
+SELECT *
+FROM customers c
+WHERE
+	(id_param IS NULL OR c.id = id_param)
+    AND (first_name_param IS NULL OR LOWER(c.first_name) LIKE (LOWER(CONCAT('%', first_name_param, '%'))))
+    AND (last_name_param IS NULL OR LOWER(c.last_name) LIKE (LOWER(CONCAT('%', last_name_param, '%'))))
+    AND (address_param IS NULL OR LOWER(c.address) LIKE (LOWER(CONCAT('%', address_param, '%'))));
+
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure get_items
 -- -----------------------------------------------------
 

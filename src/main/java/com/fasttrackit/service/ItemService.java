@@ -114,6 +114,7 @@ public class ItemService {
         itemRepository.updateStockByItemId(itemId, quantity);
     }
 
+
     @Transactional
     public void addCustomerToOrder(int customerId) {
 
@@ -125,5 +126,7 @@ public class ItemService {
 
         itemRepository.addCustomer(firstName, lastName, address);
     }
+
+
 
 }
