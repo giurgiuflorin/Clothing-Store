@@ -80,12 +80,7 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `customers_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_orders_customers_idx` (`customers_id` ASC) VISIBLE,
-  CONSTRAINT `fk_orders_customers`
-    FOREIGN KEY (`customers_id`)
-    REFERENCES `clothing_store`.`customers` (`id`)
-    ON UPDATE CASCADE)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
@@ -98,6 +93,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `clothing_store`.`orders_items` (
   `orders_id` INT NOT NULL,
   `items_id` INT NOT NULL,
+  `quantity` TINYINT NOT NULL,
   PRIMARY KEY (`orders_id`, `items_id`),
   INDEX `fk_orders_items_orders1_idx` (`orders_id` ASC) VISIBLE,
   INDEX `fk_orders_items_items1_idx` (`items_id` ASC) VISIBLE,
@@ -274,6 +270,36 @@ BEGIN
         AND (p_gender IS NULL OR LOWER(i.gender) LIKE LOWER(CONCAT('%', p_gender, '%')))
         AND (p_material IS NULL OR LOWER(i.material) LIKE LOWER(CONCAT('%', p_material, '%')))
         AND (p_color IS NULL OR LOWER(i.color) LIKE LOWER(CONCAT('%', p_color, '%')));
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_orders
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS get_orders;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_orders`(
+	IN order_id_param INT,
+    IN customer_id_param INT
+)
+BEGIN
+
+SELECT o.id,
+    o.date,
+    o.customers_id,
+    oi.items_id,
+    i.name,
+    oi.quantity,
+    oi.quantity * i.price AS total
+FROM orders o
+JOIN orders_items oi ON o.id = oi.orders_id
+JOIN items i ON oi.items_id = i.id
+WHERE (order_id_param IS NULL OR o.id = order_id_param)
+    AND (customer_id_param IS NULL OR o.customers_id = customer_id_param);
+
 END$$
 
 DELIMITER ;
