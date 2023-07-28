@@ -1,5 +1,6 @@
 package com.fasttrackit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasttrackit.entity.enumproperties.Category;
 import com.fasttrackit.entity.enumproperties.Color;
 import com.fasttrackit.entity.enumproperties.Gender;
@@ -70,6 +71,7 @@ public class Item {
     private Stock stock;
 
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "orders_items",

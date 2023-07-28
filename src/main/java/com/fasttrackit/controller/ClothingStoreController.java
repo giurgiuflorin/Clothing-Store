@@ -2,8 +2,10 @@ package com.fasttrackit.controller;
 
 import com.fasttrackit.entity.Customer;
 import com.fasttrackit.entity.Item;
+import com.fasttrackit.entity.Order;
 import com.fasttrackit.service.CustomerService;
 import com.fasttrackit.service.ItemService;
+import com.fasttrackit.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,8 @@ public class ClothingStoreController {
 
     private final ItemService itemService;
     private final CustomerService customerService;
+
+    private final OrderService orderService;
 
     @GetMapping
     public List<Item> getItems(@RequestParam(required = false) Integer id,
@@ -63,9 +67,9 @@ public class ClothingStoreController {
 
     @PutMapping("/updateItemDetails")
     public void updateItemDetails(Integer id,
-                                         @RequestParam String madeIn,
-                                         @RequestParam(required = false) Integer ecoPercent,
-                                         @RequestParam(required = false) Integer ironTemp) {
+                                  @RequestParam String madeIn,
+                                  @RequestParam(required = false) Integer ecoPercent,
+                                  @RequestParam(required = false) Integer ironTemp) {
         itemService.addItemDetails(id, madeIn, ecoPercent, ironTemp);
     }
 
@@ -92,9 +96,13 @@ public class ClothingStoreController {
 
     @PostMapping("/addCustomerToOrder")
     public void addCustomerToOrder(@RequestParam int customerId) {
-         itemService.addCustomerToOrder(customerId);
+        itemService.addCustomerToOrder(customerId);
     }
 
-
+    @GetMapping("/orders")
+    public List<Order> getOrders(@RequestParam(required = false) Integer orderId,
+                                 @RequestParam(required = false) Integer customerId) {
+         return orderService.getOrders(orderId, customerId);
+    }
 
 }

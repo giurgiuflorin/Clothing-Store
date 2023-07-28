@@ -28,18 +28,20 @@ public class Order {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @ManyToOne (cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                          CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "customers_id")
     @JsonIgnore
     private Customer customer;
-@ManyToMany(fetch = FetchType.LAZY)
-@JoinTable(name = "orders_items",
-        joinColumns = {
-                @JoinColumn(name = "orders_id", referencedColumnName = "id")
-        },
-        inverseJoinColumns = {
-                @JoinColumn(name = "items_id", referencedColumnName = "id")
-        })
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "orders_items",
+            joinColumns = {
+                    @JoinColumn(name = "orders_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "items_id", referencedColumnName = "id")
+            })
     private List<Item> items;
 }
