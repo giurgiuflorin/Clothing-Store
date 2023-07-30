@@ -346,6 +346,28 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure get_items_with_stock_lower_than
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS get_items_with_stock_lower_than;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_items_with_stock_lower_than`(
+	IN lower_than_param INT
+)
+BEGIN
+
+SELECT i.*
+FROM items i
+JOIN stocks s
+	ON i.id = s.items_id
+WHERE s.quantity < lower_than_param;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure get_orders
 -- -----------------------------------------------------
 
