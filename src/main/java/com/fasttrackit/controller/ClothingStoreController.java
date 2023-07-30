@@ -63,8 +63,8 @@ public class ClothingStoreController {
         return itemService.updateItemById(id, name, price, description, category, gender, material, color);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteItem(@PathVariable int id) {
+    @DeleteMapping("/deleteItemById")
+    public void deleteItem(@RequestParam int id) {
 
         itemService.deleteItemById(id);
     }
@@ -128,7 +128,7 @@ public class ClothingStoreController {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleIncorrectDataException(NotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
 }
