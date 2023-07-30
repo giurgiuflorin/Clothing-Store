@@ -19,6 +19,7 @@ import java.util.Optional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final OrderRepository orderRepository;
 
     public List<Item> getAllItems(Integer id, String name, Double minPrice, Double maxPrice,
                                   String description, String category, String gender,
@@ -127,6 +128,29 @@ public class ItemService {
         itemRepository.addCustomer(firstName, lastName, address);
     }
 
+    private Item getItemById(int itemId) {
+        return itemRepository.getItemById(itemId);
+    }
+
+    @Transactional
+    public void addItemToOrder(int orderId, int itemId, int quantity) {
+
+        if (getItemById(itemId) == null) {
+            throw new NotFoundException("Item with id [" + itemId + "] does not exist!");
+        }
+
+        if (!orderRepository.existsById(orderId)) {
+            throw new NotFoundException("Order with id [" + orderId + "] does not exist!");
+        }
+        Item item = itemRepository.filterItems(itemId, null, null, null, null, null, null,
+                null, null).get(0);
+        int quantityInStock = item.getStock().getQuantity();
+
+        if (quantity > quantityInStock) {
+            throw new IncorrectData("Not enough stock for item [" + itemId + "]. Available stock: " + quantityInStock);
+        }
+        itemRepository.addItemToOrder(orderId, itemId, quantity);
+    }
 
 
 }

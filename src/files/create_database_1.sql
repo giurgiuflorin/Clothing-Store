@@ -190,6 +190,51 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure add_item_to_order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS add_item_to_order;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_item_to_order`(
+	IN order_id_param INT,
+	IN item_id_param INT,
+    IN quantity_param INT
+)
+BEGIN
+
+	-- Check if the item with item_id_param exists in the items table
+    DECLARE item_exists INT;
+
+    SELECT COUNT(*) INTO item_exists
+    FROM items
+    WHERE id = item_id_param;
+
+    IF item_exists > 0 THEN
+        -- Update orders_items table only if the item exists
+           INSERT INTO orders_items (orders_id, items_id, quantity)
+    VALUES (order_id_param, item_id_param, quantity_param)
+    ON DUPLICATE KEY UPDATE quantity = quantity_param;
+
+
+        -- Update the stocks table
+        UPDATE stocks s
+        SET s.quantity = s.quantity - quantity_param
+        WHERE s.items_id = item_id_param;
+
+    ELSE
+
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Item with given id does not exist " ;
+
+    END IF;
+
+    SELECT 1;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure delete_item_and_item_details
 -- -----------------------------------------------------
 
@@ -234,6 +279,27 @@ WHERE
     AND (last_name_param IS NULL OR LOWER(c.last_name) LIKE (LOWER(CONCAT('%', last_name_param, '%'))))
     AND (address_param IS NULL OR LOWER(c.address) LIKE (LOWER(CONCAT('%', address_param, '%'))));
 
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure get_item_by_id
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS get_item_by_id;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_item_by_id`(
+	IN item_id_param INT
+)
+BEGIN
+	SELECT *
+    FROM items
+    WHERE id = item_id_param;
+
+    SELECT 1;
 
 END$$
 

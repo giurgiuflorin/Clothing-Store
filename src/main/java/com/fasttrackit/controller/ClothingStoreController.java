@@ -105,4 +105,11 @@ public class ClothingStoreController {
          return orderService.getOrders(orderId, customerId);
     }
 
+    @PostMapping("/orders/addItemToOrder")
+    public void addItemToOrder(@RequestParam int orderId,
+                               @RequestParam int itemId,
+                               @RequestParam int quantity) {
+        itemService.addItemToOrder(orderId, itemId, quantity);
+    }
+
 }

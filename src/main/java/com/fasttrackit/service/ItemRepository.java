@@ -23,6 +23,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                            @Param("material") String material,
                            @Param("color") String color);
 
+    @Query(value = "call clothing_store.get_item_by_id(:itemId)", nativeQuery = true)
+    Item getItemById(@Param("itemId") int itemId);
+
     @Query(value = "call clothing_store.update_item(:id, :name, :price, :description," +
             " :category, :gender, :material, :color)", nativeQuery = true)
     Item updateItemById(@Param("id") int id,
@@ -59,5 +62,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                      @Param("lastName") String lastName,
                      @Param("address") String address);
 
-
+    @Query(value = "call clothing_store.add_item_to_order(:orderId, :itemId, :quantity)", nativeQuery = true)
+    void addItemToOrder(@Param("orderId") int orderId,
+                        @Param("itemId") int itemId,
+                        @Param("quantity") int quantity);
 }
