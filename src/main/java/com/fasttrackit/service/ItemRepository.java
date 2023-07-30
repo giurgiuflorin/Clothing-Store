@@ -66,4 +66,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     void addItemToOrder(@Param("orderId") int orderId,
                         @Param("itemId") int itemId,
                         @Param("quantity") int quantity);
+
+    @Query(value = "call clothing_store.get_items_with_stock_lower_than(:lowerThan)", nativeQuery = true)
+    List<Item> getItemsWithStockLowerThan(@Param("lowerThan") int lowerThan);
 }

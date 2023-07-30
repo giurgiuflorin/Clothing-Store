@@ -79,6 +79,11 @@ public class ClothingStoreController {
         itemService.updateStockByItemId(itemId, quantity);
     }
 
+    @GetMapping("/stocksLowerThan")
+    public List<Item> getItemsWithStockLowerThan(@RequestParam int lowerThan) {
+        return itemService.getItemsWithStockLowerThan(lowerThan);
+    }
+
     @GetMapping("/customers")
     public List<Customer> getCustomers(@RequestParam(required = false) Integer id,
                                        @RequestParam(required = false) String firstName,

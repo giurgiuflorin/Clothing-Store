@@ -152,5 +152,7 @@ public class ItemService {
         itemRepository.addItemToOrder(orderId, itemId, quantity);
     }
 
-
+    public List<Item> getItemsWithStockLowerThan(int lowerThan) {
+       return itemRepository.getItemsWithStockLowerThan(lowerThan);
+    }
 }
