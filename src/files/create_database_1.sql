@@ -80,7 +80,12 @@ CREATE TABLE IF NOT EXISTS `clothing_store`.`orders` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `date` DATE NOT NULL,
   `customers_id` INT NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  INDEX `fk_orders_customers_idx` (`customers_id` ASC) VISIBLE,
+  CONSTRAINT `fk_orders_customers`
+    FOREIGN KEY (`customers_id`)
+    REFERENCES `clothing_store`.`customers` (`id`)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
