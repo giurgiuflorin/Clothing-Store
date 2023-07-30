@@ -3,10 +3,14 @@ package com.fasttrackit.controller;
 import com.fasttrackit.entity.Customer;
 import com.fasttrackit.entity.Item;
 import com.fasttrackit.entity.Order;
+import com.fasttrackit.exception.IncorrectData;
+import com.fasttrackit.exception.NotFoundException;
 import com.fasttrackit.service.CustomerService;
 import com.fasttrackit.service.ItemService;
 import com.fasttrackit.service.OrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -115,6 +119,16 @@ public class ClothingStoreController {
                                @RequestParam int itemId,
                                @RequestParam int quantity) {
         itemService.addItemToOrder(orderId, itemId, quantity);
+    }
+
+    @ExceptionHandler(IncorrectData.class)
+    public ResponseEntity<String> handleIncorrectDataException(IncorrectData ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleIncorrectDataException(NotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 }
