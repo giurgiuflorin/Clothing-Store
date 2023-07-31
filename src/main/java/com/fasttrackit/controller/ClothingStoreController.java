@@ -103,7 +103,7 @@ public class ClothingStoreController {
         itemService.addCustomer(firstName, lastName, address);
     }
 
-    @PostMapping("/addCustomerToOrder")
+    @PostMapping("/orders/addCustomerToOrder")
     public void addCustomerToOrder(@RequestParam int customerId) {
         itemService.addCustomerToOrder(customerId);
     }
