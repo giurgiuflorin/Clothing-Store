@@ -4,6 +4,7 @@ package com.fasttrackit.service;
 import com.fasttrackit.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,12 @@ public class OrderService {
     public List<Order> getOrders(Integer orderId, Integer customerId) {
 
           return orderRepository.getOrders(orderId, customerId);
+    }
+
+    @Transactional
+    public void addCustomerToOrder(int customerId) {
+
+        orderRepository.addCustomerToOrder(customerId);
     }
 
 

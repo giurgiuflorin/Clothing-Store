@@ -15,4 +15,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> getOrders(@Param("orderId") Integer orderId,
                           @Param("customerId") Integer customerId);
 
+    @Query(value = "call clothing_store.add_customer_to_order(:clientId)", nativeQuery = true)
+    void addCustomerToOrder(@Param("clientId") int customerId);
+
 }

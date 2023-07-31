@@ -105,7 +105,7 @@ public class ClothingStoreController {
 
     @PostMapping("/orders/addCustomerToOrder")
     public void addCustomerToOrder(@RequestParam int customerId) {
-        itemService.addCustomerToOrder(customerId);
+        orderService.addCustomerToOrder(customerId);
     }
 
     @GetMapping("/orders")

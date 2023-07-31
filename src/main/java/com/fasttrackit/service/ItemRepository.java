@@ -54,8 +54,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
                              @Param("quantity") int quantity);
 
 
-    @Query(value = "call clothing_store.add_customer_to_order(:clientId)", nativeQuery = true)
-    void addCustomerToOrder(@Param("clientId") int customerId);
 
     @Query(value = "call clothing_store.add_customer(:firstName, :lastName, :address)", nativeQuery = true)
     void addCustomer(@Param("firstName") String firstName,

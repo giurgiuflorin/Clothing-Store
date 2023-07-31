@@ -120,11 +120,7 @@ public class ItemService {
     }
 
 
-    @Transactional
-    public void addCustomerToOrder(int customerId) {
 
-        itemRepository.addCustomerToOrder(customerId);
-    }
 
     @Transactional
     public void addCustomer(String firstName, String lastName, String address) {
