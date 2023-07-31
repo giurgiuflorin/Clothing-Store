@@ -44,17 +44,18 @@ public class ItemService {
         if (description != null) {
             item.setDescription(description);
         }
+
         if (category != null) {
-            item.setCategory(Category.valueOf(category));
+            item.setCategory(Category.valueOf(category.toUpperCase()));
         }
         if (gender != null) {
-            item.setGender(Gender.valueOf(gender));
+            item.setGender(Gender.valueOf(gender.toUpperCase()));
         }
         if (material != null) {
-            item.setMaterial(Material.valueOf(material));
+            item.setMaterial(Material.valueOf(material.toUpperCase()));
         }
         if (color != null) {
-            item.setColor(Color.valueOf(color));
+            item.setColor(Color.valueOf(color.toUpperCase()));
         }
 
         return itemRepository.save(item);
@@ -92,12 +93,15 @@ public class ItemService {
         if (!itemRepository.existsById(id)) {
             throw new NotFoundException("Item with id [" + id + "] does not exist!");
         }
-        if (ecoPercent < 0 || ecoPercent > 100) {
+
+        if (ecoPercent != null && (ecoPercent < 0 || ecoPercent > 100)) {
             throw new IncorrectData("EcoPercent must have a value between 0 and 100!");
         }
-        if (ironTemp < 0 || ironTemp > 140) {
+
+        if (ironTemp != null && (ironTemp < 0 || ironTemp > 140)) {
             throw new IncorrectData("IronPercent must have a value between 0 and 140!");
         }
+
 
         itemRepository.updateItemDetails(id, madeIn, ecoPercent, ironTemp);
     }

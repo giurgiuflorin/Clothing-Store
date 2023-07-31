@@ -126,6 +126,8 @@ public class ClothingStoreController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
+
+
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleIncorrectDataException(NotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
