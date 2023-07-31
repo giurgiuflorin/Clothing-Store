@@ -398,6 +398,55 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure remove_item_from_order
+-- -----------------------------------------------------
+
+DROP PROCEDURE IF EXISTS remove_item_from_order;
+DELIMITER $$
+USE `clothing_store`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `remove_item_from_order`(
+    IN order_id_param INT,
+    IN item_id_param INT,
+    IN quantity_param INT
+)
+BEGIN
+    -- Variables to store item existence and item-in-order existence
+    DECLARE item_exists INT;
+    DECLARE item_in_order_exists INT;
+
+    -- Check if the item with item_id_param exists in the items table
+    SELECT COUNT(*) INTO item_exists
+    FROM items
+    WHERE id = item_id_param;
+
+    IF item_exists > 0 THEN
+        -- Check if the item with item_id_param exists in the orders_items table
+        SELECT COUNT(*) INTO item_in_order_exists
+        FROM orders_items
+        WHERE orders_id = order_id_param AND items_id = item_id_param;
+
+        IF item_in_order_exists > 0 THEN
+            -- Remove the item from the orders_items table
+            DELETE FROM orders_items
+            WHERE orders_id = order_id_param AND items_id = item_id_param;
+
+            -- Update the stocks table
+            UPDATE stocks s
+            SET s.quantity = s.quantity + quantity_param
+            WHERE s.items_id = item_id_param;
+        ELSE
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Item with given id does not exist in the order";
+        END IF;
+    ELSE
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Item with given id does not exist";
+    END IF;
+
+    SELECT 1;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure update_item
 -- -----------------------------------------------------
 
@@ -443,7 +492,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_item_details`(
     IN iron_temperature_param TINYINT
 )
 BEGIN
-    -- Check if item_details record exists for the given items_id
+      -- Check if item_details record exists for the given items_id
     DECLARE details_id INT;
 
     SELECT id INTO details_id
@@ -464,6 +513,7 @@ BEGIN
     END IF;
 
     SELECT 1;
+
 
 END$$
 
