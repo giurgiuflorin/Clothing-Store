@@ -121,6 +121,13 @@ public class ClothingStoreController {
         itemService.addItemToOrder(orderId, itemId, quantity);
     }
 
+    @DeleteMapping("/orders/removeItemFromOrder")
+    public void removeItemFromOrder(@RequestParam int orderId,
+                                    @RequestParam int itemId,
+                                    @RequestParam int quantity) {
+        itemService.removeItemFromOrder(orderId, itemId, quantity);
+    }
+
     @ExceptionHandler(IncorrectData.class)
     public ResponseEntity<String> handleIncorrectDataException(IncorrectData ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());

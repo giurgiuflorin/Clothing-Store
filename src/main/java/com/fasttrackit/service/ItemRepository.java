@@ -69,4 +69,9 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     @Query(value = "call clothing_store.get_items_with_stock_lower_than(:lowerThan)", nativeQuery = true)
     List<Item> getItemsWithStockLowerThan(@Param("lowerThan") int lowerThan);
+
+    @Query(value = "call clothing_store.remove_item_from_order(:orderId, :itemId, :quantity)", nativeQuery = true)
+    void removeItemFromOrder(@Param("orderId") int orderId,
+                             @Param("itemId") int itemId,
+                             @Param("quantity") int quantity);
 }

@@ -159,4 +159,9 @@ public class ItemService {
     public List<Item> getItemsWithStockLowerThan(int lowerThan) {
        return itemRepository.getItemsWithStockLowerThan(lowerThan);
     }
+
+    public void removeItemFromOrder(int orderId, int itemId, int quantity) {
+
+        itemRepository.removeItemFromOrder(orderId, itemId, quantity);
+    }
 }
