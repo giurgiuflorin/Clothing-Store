@@ -6,7 +6,8 @@ Giurgiu Florin Mircea
 
 ### General presentation
 
-This project covers the backend for an online clothing store.
+This project covers the backend for an online clothing store. With an MVC architecture, 
+it provides CRUD-type endpoints.
 
 To create the necessary database for this project, please refer to src/files, 
 where you will find the following:
