@@ -23,3 +23,5 @@ To interact with data in the database, Java code uses the native SQL language,
 however, in order to expose as little of the tabular structure as possible, database queries
 are executed by calling procedures.
 See the example below:
+
+<img src="Clothing-Store/img_files/javaprocedurecalling.png">
