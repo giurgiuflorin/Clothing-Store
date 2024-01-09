@@ -15,7 +15,7 @@ where you will find the following:
 
 
 ### Schema of relational logic
-<img src="eerdiagram.png">
+<img src="img_files/eerdiagram.png">
 
 <hr>
 
@@ -29,3 +29,11 @@ See the example below:
 <img src="img_files/javaprocedurecalling.png">
 
 <hr>
+
+### Example of GET request
+The endpoint in the example below shows a GET request that allows filtering the result based on the sent arguments.
+
+<img src="img_files/postman_example.png">
+
+
+
