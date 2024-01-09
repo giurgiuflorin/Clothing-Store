@@ -116,6 +116,11 @@ public class ItemService {
         if (!itemRepository.existsById(itemId)) {
             throw new NotFoundException("Item with id [" + itemId + "] does not exist!");
         }
+
+        if (!itemRepository.existsById(itemId)) {
+            throw new NotFoundException("Item with id [" + itemId + "] does not exist!");
+        }
+
         itemRepository.updateStockByItemId(itemId, quantity);
     }
 
