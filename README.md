@@ -1,3 +1,11 @@
+# Name of the project
+Online Clothing Store - Backend
+
+## Author
+Giurgiu Florin Mircea
+
+### General presentation
+
 This project covers the backend for an online clothing store.
 
 To create the necessary database for this project, please refer to src/files, 
