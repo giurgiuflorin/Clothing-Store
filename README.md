@@ -1,4 +1,4 @@
-# Name of the project
+## Name of the project
 Online Clothing Store - Backend
 
 ## Author
