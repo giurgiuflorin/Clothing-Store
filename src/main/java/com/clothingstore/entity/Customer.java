@@ -1,4 +1,4 @@
-package com.fasttrackit.entity;
+package com.clothingstore.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

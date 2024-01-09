@@ -1,7 +1,7 @@
-package com.fasttrackit.service;
+package com.clothingstore.service;
 
 
-import com.fasttrackit.entity.Order;
+import com.clothingstore.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

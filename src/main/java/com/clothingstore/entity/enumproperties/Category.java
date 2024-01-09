@@ -1,4 +1,4 @@
-package com.fasttrackit.entity.enumproperties;
+package com.clothingstore.entity.enumproperties;
 
 public enum Category {
 

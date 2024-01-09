@@ -1,4 +1,4 @@
-package com.fasttrackit.entity;
+package com.clothingstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

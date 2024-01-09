@@ -1,6 +1,6 @@
-package com.fasttrackit.service;
+package com.clothingstore.service;
 
-import com.fasttrackit.entity.Item;
+import com.clothingstore.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

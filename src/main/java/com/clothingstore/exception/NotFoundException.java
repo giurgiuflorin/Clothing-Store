@@ -1,4 +1,4 @@
-package com.fasttrackit.exception;
+package com.clothingstore.exception;
 
 import lombok.Getter;
 

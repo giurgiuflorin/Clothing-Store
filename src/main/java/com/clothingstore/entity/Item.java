@@ -1,10 +1,10 @@
-package com.fasttrackit.entity;
+package com.clothingstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasttrackit.entity.enumproperties.Category;
-import com.fasttrackit.entity.enumproperties.Color;
-import com.fasttrackit.entity.enumproperties.Gender;
-import com.fasttrackit.entity.enumproperties.Material;
+import com.clothingstore.entity.enumproperties.Category;
+import com.clothingstore.entity.enumproperties.Color;
+import com.clothingstore.entity.enumproperties.Gender;
+import com.clothingstore.entity.enumproperties.Material;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

@@ -1,12 +1,12 @@
-package com.fasttrackit.service;
+package com.clothingstore.service;
 
-import com.fasttrackit.entity.Item;
-import com.fasttrackit.entity.enumproperties.Category;
-import com.fasttrackit.entity.enumproperties.Color;
-import com.fasttrackit.entity.enumproperties.Gender;
-import com.fasttrackit.entity.enumproperties.Material;
-import com.fasttrackit.exception.IncorrectData;
-import com.fasttrackit.exception.NotFoundException;
+import com.clothingstore.entity.Item;
+import com.clothingstore.entity.enumproperties.Category;
+import com.clothingstore.entity.enumproperties.Color;
+import com.clothingstore.entity.enumproperties.Gender;
+import com.clothingstore.entity.enumproperties.Material;
+import com.clothingstore.exception.IncorrectData;
+import com.clothingstore.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

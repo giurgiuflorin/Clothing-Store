@@ -1,13 +1,13 @@
-package com.fasttrackit.controller;
+package com.clothingstore.controller;
 
-import com.fasttrackit.entity.Customer;
-import com.fasttrackit.entity.Item;
-import com.fasttrackit.entity.Order;
-import com.fasttrackit.exception.IncorrectData;
-import com.fasttrackit.exception.NotFoundException;
-import com.fasttrackit.service.CustomerService;
-import com.fasttrackit.service.ItemService;
-import com.fasttrackit.service.OrderService;
+import com.clothingstore.entity.Customer;
+import com.clothingstore.entity.Item;
+import com.clothingstore.entity.Order;
+import com.clothingstore.exception.IncorrectData;
+import com.clothingstore.exception.NotFoundException;
+import com.clothingstore.service.CustomerService;
+import com.clothingstore.service.ItemService;
+import com.clothingstore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

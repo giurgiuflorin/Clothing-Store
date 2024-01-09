@@ -1,6 +1,6 @@
-package com.fasttrackit.service;
+package com.clothingstore.service;
 
-import com.fasttrackit.entity.Customer;
+import com.clothingstore.entity.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
