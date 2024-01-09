@@ -19,9 +19,13 @@ where you will find the following:
 
 <hr>
 
-To interact with data in the database, Java code uses the native SQL language,
+  To interact with data in the database, Java code uses the native SQL language,
 however, in order to expose as little of the tabular structure as possible, database queries
-are executed by calling procedures.
+are executed by calling procedures and passing arguments.
+<p>If the operational mechanism of the procedure is to be changed, this will not
+affect the Java code as long as the procedure retains its signature.</p>
 See the example below:
 
-<img src="Clothing-Store/img_files/javaprocedurecalling.png">
+<img src="img_files/javaprocedurecalling.png">
+
+<hr>
